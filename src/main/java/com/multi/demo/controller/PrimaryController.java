@@ -25,6 +25,6 @@ public class PrimaryController {
         List<Primary> primaryList = primaryRepository.findAll();
         System.out.println(primaryList.size());
 
-        return new ResponseEntity<>( "dang thang", HttpStatus.OK);
+        return new ResponseEntity<>( primaryList.toString(), HttpStatus.OK);
     }
 }

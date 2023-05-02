@@ -21,11 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration()
-@EnableJpaRepositories(
-        basePackages = "com.multi.demo.repository.primary",
-        entityManagerFactoryRef = "primaryEntityManager",
-        transactionManagerRef = "primaryTransactionManager"
-)
+@EnableJpaRepositories(basePackages = "com.multi.demo.repository.primary", entityManagerFactoryRef = "primaryEntityManager", transactionManagerRef = "primaryTransactionManager")
 @EntityScan(basePackages = {"com.multi.demo.entity.primary"})
 public class PrimaryConfig {
     @Bean
@@ -34,7 +30,6 @@ public class PrimaryConfig {
     public DataSourceProperties primaryProperties() {
         return new DataSourceProperties();
     }
-
     @Bean
     @Primary
     @ConfigurationProperties("spring.datasource.primary.configuration")
@@ -42,7 +37,6 @@ public class PrimaryConfig {
         return primaryProperties().initializeDataSourceBuilder()
                 .type(HikariDataSource.class).build();
     }
-
     @Primary
     @Bean(name = "primaryEntityManager")
     public LocalContainerEntityManagerFactoryBean primaryEntityManager(EntityManagerFactoryBuilder builder){
@@ -55,7 +49,6 @@ public class PrimaryConfig {
         return builder
                 .dataSource(primaryDataSource()).packages("com.multi.demo.entity.primary").persistenceUnit("primary").properties(properties).build();
     }
-
     @Primary
     public PlatformTransactionManager primaryTransactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);}
