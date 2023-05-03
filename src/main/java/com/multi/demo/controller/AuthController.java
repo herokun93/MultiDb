@@ -1,9 +1,7 @@
 package com.multi.demo.controller;
 
-import com.multi.demo.entity.primary.Primary;
-import com.multi.demo.entity.secondary.Secondary;
-import com.multi.demo.repository.primary.PrimaryRepository;
-import com.multi.demo.repository.secondary.SecondaryRepository;
+import com.multi.demo.entity.auth.Auth;
+import com.multi.demo.repository.auth.AuthRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,15 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/secondary")
+@RequestMapping("/api/auth")
 @Slf4j
-public class SecondaryController {
+public class AuthController {
 
     @Autowired
-    private SecondaryRepository secondaryRepository;
+    private AuthRepository authRepository;
 
-    @Autowired
-    private PrimaryRepository primaryRepository;
+
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
@@ -32,8 +29,8 @@ public class SecondaryController {
 
 //        List<Secondary> secondaries = secondaryRepository.findAll();
 //        System.out.println(secondaries.size());
-        List<Primary> primaryList = primaryRepository.findAll();
+        List<Auth> authList = authRepository.findAll();
 
-        return new ResponseEntity<>( primaryList.toString(), HttpStatus.OK);
+        return new ResponseEntity<>( authList.toString(), HttpStatus.OK);
     }
 }
